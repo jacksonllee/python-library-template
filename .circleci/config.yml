@@ -1,0 +1,47 @@
+version: 2
+jobs:
+  test_python_package:
+    docker:
+      - image: python:3.6
+    steps:
+      - checkout
+      # - run: git submodule update --init --recursive  # activate as needed
+      - run:
+          name: check that dev-requirements are a superset of requirements
+          working_directory: ~/project/
+          command: |
+            if [[ $(comm -23 <(sort requirements.txt) <(sort dev-requirements.txt)) ]]
+              then exit 1
+            fi
+      - restore_cache:
+          keys:
+            - pip-{{ checksum "dev-requirements.txt" }}-{{ checksum "requirements.txt" }}
+      - run:
+          name: Install all Python requirements
+          working_directory: ~/project/
+          command: |
+              pip install --progress-bar off --upgrade pip setuptools
+              pip install --progress-bar off -r dev-requirements.txt
+              pip install --progress-bar off .
+      - save_cache:
+          key: pip-{{ checksum "dev-requirements.txt" }}-{{ checksum "requirements.txt" }}
+          paths:
+            - ~/.cache/pip
+      - run:
+          name: Run linter
+          command: flake8 foobar
+      - run:
+          name: Run python tests
+          command: PYTHONPATH=. pytest -vv --cov=foobar foobar
+      - run:
+          name: Dependency Security Check
+          command: safety check
+      - run:
+          name: Source Code Security Check
+          command: bandit -r foobar -x tests
+
+workflows:
+  version: 2
+  test_python_package:
+    jobs:
+      - test_python_package
