@@ -39,3 +39,8 @@ Please see [CHANGELOG.md](CHANGELOG.md).
 
 (Specify license here)
 Please see [LICENSE.txt](LICENSE.txt).
+
+## For Maintainers
+
+* [Releasing the package on the Python Package Index (PyPI)](pypi_release.md)
+* TODO Compiling the documentation website
