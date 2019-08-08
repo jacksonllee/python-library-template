@@ -33,7 +33,7 @@ def main():
         packages=setuptools.find_packages(),
         url="(URL)",
         keywords=["keyword1", "keyword2"],
-        license="(specify license)",
+        license="Apache 2.0",
         python_requires=">=3.6",
         zip_safe=False,
         # Minimal requirements (vs. exact version pins in requirements.txt)
@@ -46,6 +46,9 @@ def main():
             "Development Status :: 3 - Alpha",
             "License :: OSI Approved :: Apache Software License",
             "Operating System :: OS Independent",
+        ],
+        data_files=[
+            (".", ["LICENSE.txt", "CHANGELOG.md", "requirements.txt"]),
         ],
     )
 
