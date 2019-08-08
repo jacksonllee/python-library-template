@@ -17,27 +17,41 @@ jobs:
           keys:
             - pip-{{ checksum "dev-requirements.txt" }}-{{ checksum "requirements.txt" }}
       - run:
-          name: Install all Python requirements
+          name: Install Python requirements
           working_directory: ~/project/
           command: |
               pip install --progress-bar off --upgrade pip setuptools
               pip install --progress-bar off -r dev-requirements.txt
-              pip install --progress-bar off .
       - save_cache:
           key: pip-{{ checksum "dev-requirements.txt" }}-{{ checksum "requirements.txt" }}
           paths:
             - ~/.cache/pip
       - run:
+          name: Build source distribution and install package from it
+          # Ensure we can build a source distribution that can correctly install.
+          # "python setup.py sdist" creates dist/<package-name>-x.y.z.tar.gz
+          command: |
+              python setup.py sdist
+              pip install dist/`ls dist/ | grep .tar.gz`
+      - run:
           name: Run linter
-          command: flake8 foobar
+          working_directory: ~/
+          # Avoid being able to import wikipron.py by relative import.
+          # Test code by importing the *installed* wikipron in site-packages.
+          command: flake8 project/foobar
       - run:
           name: Run python tests
-          command: PYTHONPATH=. pytest -vv --cov=foobar foobar
+          working_directory: ~/
+          # Avoid being able to import wikipron.py by relative import.
+          # Test code by importing the *installed* wikipron in site-packages.
+          command: pytest -vv --cov=project/foobar project/foobar
       - run:
           name: Dependency Security Check
+          working_directory: ~/project/
           command: safety check
       - run:
           name: Source Code Security Check
+          working_directory: ~/project/
           command: bandit -r foobar -x tests
 
 workflows:
