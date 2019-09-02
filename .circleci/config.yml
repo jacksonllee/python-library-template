@@ -1,6 +1,14 @@
 version: 2
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build-python-3.6
+      - build-python-3.7
+
 jobs:
-  test_python_package:
+  build-python-3.6: &template
     docker:
       - image: python:3.6
     steps:
@@ -53,9 +61,7 @@ jobs:
           name: Source Code Security Check
           working_directory: ~/project/
           command: bandit -r foobar -x tests
-
-workflows:
-  version: 2
-  test_python_package:
-    jobs:
-      - test_python_package
+  build-python-3.7:
+    <<: *template
+    docker:
+      - image: python:3.7
