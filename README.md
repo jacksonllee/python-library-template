@@ -20,7 +20,7 @@ To download and install the library for development:
 ```bash
 git clone <some-appropriate-url>
 cd foobar
-pip install -r dev-requirements.txt
+pip install -r requirements.txt
 pip install -e .
 ```
 
