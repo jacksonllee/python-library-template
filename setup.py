@@ -4,14 +4,6 @@ import setuptools
 
 _VERSION = "0.0.0"
 
-if getattr(setuptools, "__version__", "0") < "39":
-    # v36.4.0+ needed to automatically include README.md in packaging
-    # v38.6.0+ needed for long_description_content_type in setup()
-    raise EnvironmentError(
-        "Your setuptools is too old. "
-        "Please run 'pip install --upgrade pip setuptools'."
-    )
-
 _THIS_DIR = os.path.dirname(os.path.realpath(__file__))
 
 with open(os.path.join(_THIS_DIR, "README.md")) as f:
@@ -34,8 +26,9 @@ def main():
         license="Apache 2.0",
         python_requires=">=3.6",
         zip_safe=False,
+        setup_requires=["setuptools>=39"],
         # Minimal requirements (vs. exact version pins in requirements.txt)
-        install_requires=["setuptools"],
+        # install_requires=[],
         # PyPI trove classifiers, see https://pypi.org/classifiers/
         classifiers=[
             "Programming Language :: Python :: 3.6",
