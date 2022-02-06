@@ -3,13 +3,13 @@
 1. Ensure setuptools, wheel, and twine are installed and up-to-date.
 
     ```bash
-    $ pip install -U setuptools wheel twine
+    $ pip install -U build twine
     ```
 
 2. Generate the source distribution and wheel.
 
     ```bash
-    $ python setup.py sdist bdist_wheel
+    $ python -m build
     ```
 
 3. After this command finishes, new files are found under `dist/`:

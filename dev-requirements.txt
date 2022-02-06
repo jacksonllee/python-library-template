@@ -1,0 +1,6 @@
+# Pin all versions for development purposes.
+black==22.1.0
+build==0.7.0
+flake8==4.0.1
+pytest==7.0.0
+twine==3.8.0

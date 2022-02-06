@@ -1,5 +1,0 @@
-# Pin all versions for development purposes.
-bandit==1.6.2
-flake8==3.7.9
-pytest==5.4.1
-safety==1.9.0
