@@ -4,7 +4,7 @@ import re
 import foobar
 
 
-_REPO_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+_REPO_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 def test_version_number_match_with_changelog():
