@@ -1,9 +1,9 @@
 # Make a release on PyPI
 
-1. Ensure setuptools, wheel, and twine are installed and up-to-date.
+1. Ensure packaging tools are installed and up-to-date.
 
     ```bash
-    $ pip install -U build twine
+    $ pip install -U build twine pip setuptools
     ```
 
 2. Generate the source distribution and wheel.

@@ -1,3 +1,67 @@
 [build-system]
-requires = ["setuptools >= 42.0.0", "wheel"]
+requires = ["setuptools >= 65.3.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "foobar"
+version = "0.0.1"
+description = "Some description"
+readme = "README.rst"
+requires-python = ">= 3.7.*"
+license = { text = "MIT License" }
+authors = [ { name = "Jackson L. Lee", email = "jacksonlunlee@gmail.com" } ]
+keywords = [
+    "computational linguistics",
+    "natural language processing",
+    "linguistics",
+]
+dependencies = [
+    'importlib-metadata >= 1.0; python_version < "3.8"',
+]
+classifiers = [
+    # # https://pypi.org/classifiers/
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Human Machine Interfaces",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Text Processing",
+    "Topic :: Text Processing :: General",
+    "Topic :: Text Processing :: Indexing",
+    "Topic :: Text Processing :: Linguistic",
+]
+
+[project.urls]
+Homepage = "<URL>"
+Source = "<URL>"
+
+[tool.setuptools]
+zip-safe = false
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = [ "src" ]
+
+#[tool.setuptools.package-data]
+#foobar = [
+#    "files_possibly_with_glob_pattern_matching",
+#]
+
+#[project.scripts]
+#executable-name = "package.module:function"
+
+[tool.pytest.ini_options]
+addopts = "-vv --durations=0"
+testpaths = ["tests", "docs"]

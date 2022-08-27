@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.4.1
+  win: circleci/windows@5.0
 
 jobs:
   pre-build:
@@ -93,12 +93,14 @@ workflows:
           name: safety
           command-run: |
             pip install -e . && \
+            # Don't pin safety's version. Just use the latest version all the time with --upgrade.
             pip install --upgrade safety && \
             safety --version && \
             pip freeze | safety check --stdin
       - pre-build:
           name: bandit
           command-run: |
+            # Don't pin bandit's version. Just use the latest version all the time with --upgrade.
             pip install --upgrade bandit && \
             bandit --version && \
             bandit -r src -x tests

@@ -20,7 +20,7 @@ MIT License
 Setting Up A Local Development Environment
 ------------------------------------------
 
-For local development, set up a Python virtual environment,
+For local development, set up an isolated Python environment,
 then download and install from the GitHub source:
 
 .. code-block:: bash
